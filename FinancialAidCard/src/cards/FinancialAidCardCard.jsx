@@ -7,8 +7,7 @@ import {
     TableRow,
     TableCell,
     TableBody,
-    Typography,
-    Button
+    Typography
 } from '@ellucian/react-design-system/core';
 import { widthFluid } from '@ellucian/react-design-system/core/styles/tokens';
 import financialAidData from '../data/data.json';
@@ -22,7 +21,12 @@ const styles = () => ({
         backgroundColor: '#f8f8f8',
         padding: '16px',
         maxWidth: 500,
-        margin: '0 auto'
+        margin: '0 auto',
+        cursor: 'pointer', // 👈 show clickable pointer
+        transition: 'background-color 0.2s ease-in-out',
+        '&:hover': {
+            backgroundColor: '#f0f0f0'
+        }
     },
     header: {
         fontWeight: 'bold',
@@ -34,25 +38,12 @@ const styles = () => ({
         marginBottom: '8px'
     },
     tableContainer: {
-        maxHeight: 250,
-        overflowY: 'auto',
         border: '1px solid #ddd',
         borderRadius: '4px',
         marginBottom: '12px'
     },
     th: {
         fontWeight: 'bold'
-    },
-    viewButton: {
-        border: '1px solid red',
-        color: 'red',
-        backgroundColor: 'transparent',
-        textTransform: 'uppercase',
-        fontWeight: 'bold',
-        fontSize: '0.8rem',
-        '&:hover': {
-            backgroundColor: '#ffe5e5'
-        }
     }
 });
 
@@ -63,27 +54,33 @@ const FinancialAidCardCard = (props) => {
     const yearData = financialAidData.financialAidYears.find(y => y.year === '23/24');
 
     const handleClick = () => {
-        console.log("clicked");
+        console.log("Card clicked");
         navigateToPage({
             route: `/financial-aid`,
-
         });
     };
-  
 
     return (
-        <div className={classes.root}>
+        <div
+            className={classes.root}
+            role="button"
+            tabIndex={0}
+            onClick={handleClick}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    handleClick();
+                }
+            }}
+        >
             <Typography className={classes.header}>FINANCIAL AID</Typography>
             <Typography className={classes.year}>FIN AID YEAR : {yearData.year}</Typography>
 
             <div className={classes.tableContainer}>
-                <Table stickyHeader>
+                <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell className={classes.th}>Aid Type</TableCell>
                             <TableCell className={classes.th} align="right">Amt Offered</TableCell>
-                            <TableCell className={classes.th} align="right">Amt Accepted</TableCell>
-                            <TableCell className={classes.th} align="right">Amt Paid</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -91,20 +88,11 @@ const FinancialAidCardCard = (props) => {
                             <TableRow key={index}>
                                 <TableCell>{award.period} - {award.fundDescription}</TableCell>
                                 <TableCell align="right">${award.amountOffered.toFixed(2)}</TableCell>
-                                <TableCell align="right">${award.amountAccepted.toFixed(2)}</TableCell>
-                                <TableCell align="right">${award.amountPaid.toFixed(2)}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </div>
-
-            <Button
-                onClick={() => handleClick()}
-                className={classes.viewButton}
-            >
-                View Details
-            </Button>
         </div>
     );
 };
