@@ -1,0 +1,42 @@
+{
+  "studentId": "123456",
+  "financialAidYears": [
+    {
+      "year": "23/24",
+      "awards": [
+        {
+          "period": "Spring 2023-0",
+          "fundCode": "PELL",
+          "fundDescription": "Pell Grant",
+          "amountOffered": 3497.00,
+          "amountAccepted": 0.00,
+          "amountPaid": 0.00
+        },
+        {
+          "period": "Fall 2024-10",
+          "fundCode": "PELL",
+          "fundDescription": "Pell Grant",
+          "amountOffered": 1400.00,
+          "amountAccepted": 0.00,
+          "amountPaid": 0.00
+        }
+      ]
+    },
+    {
+      "year": "22/23",
+      "awards": [
+        {
+          "period": "Spring 2022-0",
+          "fundCode": "SEOG",
+          "fundDescription": "Supplemental Education Opportunity Grant",
+          "amountOffered": 2000.00,
+          "amountAccepted": 2000.00,
+          "amountPaid": 1500.00
+        }
+      ]
+    }
+  ],
+  "links": {
+    "viewDetails": "https://university.edu/financial-aid/details"
+  }
+}
